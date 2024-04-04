@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# 파일 이름의 첫 글자에 따라 해당하는 폴더로 이동시킴
+for file in files/*; do
+    if [ -f "$file" ]; then
+        filename=$(basename "$file")
+        first_char="${filename:0:1}"  # 파일 이름의 첫 글자 추출
+
+        # 파일 이름의 첫 글자에 따라 소문자로 변환하여 폴더를 만들고 파일을 이동시킴
+        lowercase_first_char=$(echo "$first_char" | tr '[:upper:]' '[:lower:]')
+        mkdir -p "$lowercase_first_char"
+        mv "$file" "$lowercase_first_char/"
+    fi
+done
